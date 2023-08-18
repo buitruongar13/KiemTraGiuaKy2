@@ -15,7 +15,7 @@
                 <h2>Edit Channel</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('companies.index') }}" enctype="multipart/form-data">
+                <a class="btn btn-primary" href="{{ route('channel.index') }}" enctype="multipart/form-data">
                     Back</a>
             </div>
         </div>
@@ -32,8 +32,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Channel Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Channel Name">
-                    @error('name')
+                    <input type="text" name="channelName" class="form-control" value="{{$channel->channelName}}">
+                    @error('channelName')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>
@@ -41,7 +41,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <input type="email" name="Description" class="form-control" placeholder="Description">
+                    <input type="text" name="Description" class="form-control" value="{{$channel->Description}}">
                     @error('Description')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -50,7 +50,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>SubsribersCount:</strong>
-                    <input type="text" name="SubsribersCount" class="form-control" placeholder="SubsribersCount">
+                    <input type="text" name="SubsribersCount" class="form-control" value="{{$channel->SubsribersCount}}">
                     @error('SubsribersCount')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -59,8 +59,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>URL:</strong>
-                    <input type="text" name="url" class="form-control" placeholder="URL">
-                    @error('url')
+                    <input type="text" name="URL" class="form-control" value="{{ $channel->URL}}">
+                    @error('URL')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>

@@ -19,26 +19,33 @@ class ChannelController extends Controller
     public function store(Request $request){
 
         Channel::create($request->post());
-        return redirect()->route('channel.index')->with('success','Company has been created successfully.');
+        return redirect()->route('channel.index')->with('success','Channel has been created successfully.');
 
     }
     public function show(string $id){
         $channel = DB::selectOne("SELECT * FROM channels WHERE ChannelID = ?", [$id]);
-        return response()->json($channel);
+        return view("post", compact('channel'));
     }
     public function edit(string $id){
-        $channel = Channel::find(15);
+        $channel = DB::selectOne("SELECT * FROM channels WHERE ChannelID = ?", [$id]);
         return view("edit", compact('channel'));
     }
     public function update(Request $request, string $id){
-        $channel = Channel::find($id);
-        $channel->fill($request->post())->save();
+        // $channel = DB::selectOne("SELECT * FROM channels WHERE ChannelID = ?", [$id]);
+        // $channel = new Channel();
+        // $channel->fill((array)$channelData)->save();
+        $channel = Channel::where('ChannelID', $id)->first();
 
-        return redirect()->route('companies.index')->with('success','Company Has Been updated successfully');
+        $channelName = $request->input('channelName');
+        $Description = $request->input('Description');
+        $SubsribersCount = $request->input('SubsribersCount');
+        $URL = $request->input('URL');
+        $channel->save();
+        return redirect()->route('channel.index')->with('success','Channel Has Been updated successfully');
     }
-    public function destroy(string $id){
-        $channel = Channel::find($id);
-        $channel->delete();
-        return redirect()->route('companies.index')->with('success','Company has been deleted successfully: '.$id);
-    }
+    // public function destroy(string $id){
+    //     $channel = Channel::find($id);
+    //     $channel->delete();
+    //     return redirect()->route('companies.index')->with('success','Company has been deleted successfully: '.$id);
+    // }
 }

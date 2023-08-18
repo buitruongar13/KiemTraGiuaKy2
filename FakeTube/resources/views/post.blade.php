@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add Channel Form - Laravel 9 CRUD</title>
+    <title>Edit Company Form - Laravel 9 CRUD Tutorial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -11,11 +11,12 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left mb-2">
-                <h2>Add Channel</h2>
+            <div class="pull-left">
+                <h2>Detail Channel</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('channel.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('channel.index') }}" enctype="multipart/form-data">
+                    Back</a>
             </div>
         </div>
     </div>
@@ -24,14 +25,15 @@
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('channel.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('channel.update',$channel->channelID) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Channel Name:</strong>
-                    <input type="text" name="channelName" class="form-control" placeholder="channelName">
-                    @error('channelName')
+                    <input type="text" name="name" class="form-control" value="{{$channel->channelName}}">
+                    @error('name')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>
@@ -39,7 +41,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <input type="text" name="Description" class="form-control" placeholder="Description">
+                    <input type="text" name="Description" class="form-control" value="{{$channel->Description}}">
                     @error('Description')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -48,7 +50,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>SubsribersCount:</strong>
-                    <input type="text" name="SubsribersCount" class="form-control" placeholder="SubsribersCount">
+                    <input type="text" name="SubsribersCount" class="form-control" value="{{$channel->SubsribersCount}}">
                     @error('SubsribersCount')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -57,13 +59,12 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>URL:</strong>
-                    <input type="text" name="URL" class="form-control" placeholder="URL">
-                    @error('URL')
+                    <input type="text" name="url" class="form-control" value="{{ $channel->URL}}">
+                    @error('url')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary ml-3">Add</button>
         </div>
     </form>
 </div>
